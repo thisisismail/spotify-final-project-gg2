@@ -5,10 +5,28 @@ const actions = {
       payload: text,
     }  
   },
-  selectSongAction : (song) => {
+  selectTrackAction : (song) => {
     return {
-      type: 'SONGS',
+      type: 'TRACKS',
       payload: song,
+    }
+  },
+  searchInput : (text) => {
+    return {
+      type: 'INPUTSEARCH',
+      payload: text,
+    }
+  },
+  searchResult : (text) => {
+    return {
+      type: 'SEARCHRESULT',
+      payload: text,
+    }
+  },
+  userID : (text) => {
+    return {
+      type: 'USERID',
+      payload: text,
     }
   }
 }

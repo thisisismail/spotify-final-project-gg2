@@ -4,11 +4,10 @@ import {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {Button, Link} from '@mui/material/';
 import actions from '../../store/redux/actions/index.js';
-import {useHistory} from 'react-router-dom'
+import {useHistory} from 'react-router-dom';
+import {FetchLogin} from '../../API-call/index.js'
 
-const ID = process.env.REACT_APP_API_CLIENT_ID;
-const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
-const AUTH_URL = `https://accounts.spotify.com/authorize?response_type=token&client_id=${ID}&scope=playlist-modify-private%20user-read-private&redirect_uri=${REDIRECT_URI}`;
+const AUTH_URL = FetchLogin();
 
 const ButtonLogin = (props) => {
 
@@ -30,7 +29,7 @@ const ButtonLogin = (props) => {
     console.log(props.tokenFromRedux)
   });
 
-  useEffect((e) => {
+  useEffect(() => {
     if(props.tokenFromRedux !== ''){
         goPrivate();
         console.log(props.tokenFromRedux);
@@ -51,8 +50,6 @@ const ButtonLogin = (props) => {
     </div>
   )
 }
-
-
 
 const mapStateToProps = state => { // call global state
   return{

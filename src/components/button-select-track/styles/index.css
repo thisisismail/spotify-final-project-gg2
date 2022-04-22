@@ -1,0 +1,30 @@
+.Item-button button{
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.Item-button button:hover {
+  background-color: rgb(100, 120, 237);
+  color: whitesmoke;
+}
+
+.Item-button button:active {
+  font-size: 10px;
+}
+
+.addPlaylist button{
+  display: block;
+  position: relative;
+  z-index: 11;
+  height: 20px;
+  width: 80px;
+  border-radius: 50px;
+  border: 0px;
+  background-color: rgb(229, 233, 240);
+  color: rgb(112, 112, 112);
+}
+
+
+
