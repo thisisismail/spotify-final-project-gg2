@@ -2,7 +2,7 @@ import './styles/index.css';
 import React from 'react';
 import {connect} from 'react-redux';
 import {useState, useEffect} from 'react';
-import {Card, CardContent} from '@mui/material/';
+import {Box, Card, CardContent} from '@mui/material/';
 import actions from '../../store/redux/actions/index.js';
 import ButtonSelectTrack from '../button-select-track/index.js';
 
@@ -23,26 +23,28 @@ function TracksList(props) {
   }
 
   const tracks = props.searchResultFromRedux?.map( v => (
-    <Card key={v.id}>
-      <CardContent>
-      <div className="TrackItem-Container" >
-        <div id="numbering">{iteration += 1}</div>
-        <div id="track-image"><img src={v.album.images[2].url} alt="GIF"></img></div>
-        <div id="track-title">{v.name}</div>
-        <div id="track-artist">{v.album.artists[0].name}</div>
-        <div id="track-type"> {v.type}</div>
-        <div id="duration">{msecToSec(v.duration_ms)}</div>
-        <div id="select-btn">
-          <ButtonSelectTrack 
-            uri={v.uri} 
-            title={v.name} 
-            setSelectedtracks={setSelectedtracks} 
-            selectedtracks={selectedtracks} 
-          />
+    <Box key={v.id} sx={{width: '100%', minWidth: 500}}>
+      <Card  sx={{ mb: 1}}>
+        <CardContent>
+        <div className="TrackItem-Container" >
+          <div id="numbering">{iteration += 1}</div>
+          <div id="track-image"><img src={v.album.images[2].url} alt="GIF"></img></div>
+          <div id="track-title">{v.name}</div>
+          <div id="track-artist">{v.album.artists[0].name}</div>
+          <div id="track-type"> {v.type}</div>
+          <div id="duration">{msecToSec(v.duration_ms)}</div>
+          <div id="select-btn">
+            <ButtonSelectTrack 
+              uri={v.uri} 
+              title={v.name} 
+              setSelectedtracks={setSelectedtracks} 
+              selectedtracks={selectedtracks} 
+            />
+          </div>
         </div>
-      </div>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </Box>
   ))
 
   return (

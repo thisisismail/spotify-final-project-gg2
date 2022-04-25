@@ -1,18 +1,20 @@
 .BodyPage {
   display: grid;
-  grid-template:  repeat(3, 1fr)/repeat(3, 1fr);
-  margin-top: 56px;
+  grid-template:  70px 1fr 60px/400px 1fr 500px;
 }
 
 .Playlist-Card {
-  display: block;
+  display: grid;
   grid-column: 1/2;
-  grid-row: 1/4;
+  grid-row: 2/3;
+  position: fixed;
+  top: 70px;
+  width: 400px;
 }
 
 .TracksList-Container {
   display: grid;
   grid-column: 2/3;
-  grid-row: 1/4;
+  grid-row: 2/3;
 }
 

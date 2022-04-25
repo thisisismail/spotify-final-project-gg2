@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import actions from '../../../store/redux/actions/index.js';
 import TracksList from '../../../components/tracks-list/index.js';
 import PlaylistCard from '../../../components/card-playlist/index.js';
-
+import Dummy from '../../../components/card-playlist/dummy.js';
 
 function BodyPage(props) {
 
@@ -12,7 +12,8 @@ function BodyPage(props) {
     <>
     <div className="BodyPage">
       <div className="Playlist-Card">
-        <PlaylistCard/>
+        {/* <PlaylistCard/> */}
+        <Dummy/>
       </div>
       <div className="TracksList-Container">
         <TracksList/>
