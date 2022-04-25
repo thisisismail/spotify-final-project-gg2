@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import './styles/index.css';
 import React from 'react';
 import {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
-import { Alert, Dialog} from '@mui/material';
+import { Alert, Dialog, Card, CardContent, CardActions, Box, Button, TextField, Stack} from '@mui/material';
+import Grid from "@material-ui/core/Grid";
 import {FetchUserID, FetchCreateNewPlaylist, FetchInputTracksToPlaylist} from '../../API-call/index.js';
 import actions from '../../store/redux/actions/index.js';
 
@@ -80,37 +80,49 @@ const PlaylistCard = (props) => {
     </div>
   );
 
+  const selectedTitles = props.titlesFromRedux?.map((v) => {
+      return(<div key={v}>{v}</div>)
+    })
+
   return (
-      <div className="Album-item">
-        {alert}
-        <form onSubmit={getUserID}>
-          <ul>
-            <li>
-              <label>Title</label><br></br>
-              <input 
-                type="text" 
-                name="title" 
-                value={playlist.title} 
-                onChange={getInputPlaylist}>
-              </input>
-            </li>
-            <li>
-              <label>Description</label><br></br>
-              <textarea 
-                type="text" 
-                name="description" 
-                value={playlist.description} 
-                onChange={getInputPlaylist}>
-              </textarea>
-            </li>
-            {/* <li>
-              <label>Songs</label><br></br>
-              <div id="playlist-songs">{albumItems}</div>
-            </li> */}
-          </ul>
-          <button type="submit" className="btn-submit">CREATE PLAYLIST</button>
-        </form>
-      </div>
+    <>
+      {alert}
+      <form onSubmit={getUserID}>
+        <Box sx={{ pl: 1, pr: 1 }}>
+          <Card sx={{p: 1, pb: 2}}>
+            <CardContent>
+              <Stack direction="column" spacing={2}>
+                <TextField
+                  id="outlined-search" 
+                  type="search"
+                  label="Title"
+                  name="title" 
+                  value={playlist.title} 
+                  onChange={getInputPlaylist}>
+                </TextField>
+                <TextField 
+                  id="outlined-search" 
+                  type="search"
+                  label="Description"
+                  multiline={true}
+                  rows={3}
+                  name="description" 
+                  value={playlist.description} 
+                  onChange={getInputPlaylist}>
+                </TextField>
+              </Stack>
+            </CardContent>
+            <CardActions>
+              <Grid container justifyContent="center">
+                <Button type="submit" size="small" color="secondary" variant="contained">CREATE PLAYLIST</Button>
+              </Grid>
+            </CardActions>
+          </Card>
+        </Box>
+        {/* {selectedTitles} */}
+      </form>
+    </>
+
   );
 };
 
@@ -119,6 +131,7 @@ const mapStateToProps = state => { // call global state
     tokenFromRedux: state.storeToken,
     searchInputFromRedux: state.storeSearch,
     tracksFromRedux: state.storeTracks,
+    titlesFromRedux: state.storeTitles,
     searchResultFromRedux: state.storeSearchResult,
     userIDFromRedux: state.storeUserID,
   }

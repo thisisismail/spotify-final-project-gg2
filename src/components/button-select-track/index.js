@@ -5,7 +5,7 @@ import {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import actions from '../../store/redux/actions/index.js';
 
-const ButtonSelectTrack = ({uri, title, selectedtracks, setSelectedtracks}) => {
+const ButtonSelectTrack = ({uri, title, selectedtracks, setSelectedtracks, selectedtitles, setSelectedtitles}) => {
   const btnOn = {backgroundColor: "rgb(100, 120, 237)", color: "rgb(255, 255, 255)"};
   const btnOff = {backgroundColor: "rgb(229, 233, 240)"};
 
@@ -18,16 +18,22 @@ const ButtonSelectTrack = ({uri, title, selectedtracks, setSelectedtracks}) => {
       setBtnmessage('selected');
       setBtncolor(btnOn);
       setSelectedtracks(selectedtracks.concat(uri));
+      setSelectedtitles(selectedtitles.concat(title));
     }else{
       setBtnmessage('select');
       setBtncolor(btnOff);
-      setSelectedtracks(selectedtracks?.slice(0, -1));
+      deleteHandler(uri, title)
     }
   }, [btnstatus])
 
   const clickHandler = () => {
     setBtnstatus(!btnstatus);
     console.log(uri+' '+title);
+  }
+
+  const deleteHandler = (deletedUri, deletedTitle) => {
+    setSelectedtracks(selectedtracks.filter(v => v !== deletedUri))
+    setSelectedtitles(selectedtitles.filter(v => v !== deletedTitle))
   }
 
   return(

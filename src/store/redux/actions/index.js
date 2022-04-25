@@ -11,6 +11,12 @@ const actions = {
       payload: song,
     }
   },
+  selectTitleAction : (song) => {
+    return {
+      type: 'TITLES',
+      payload: song,
+    }
+  },
   searchInput : (text) => {
     return {
       type: 'INPUTSEARCH',

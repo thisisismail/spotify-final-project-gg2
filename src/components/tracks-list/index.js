@@ -9,9 +9,11 @@ import ButtonSelectTrack from '../button-select-track/index.js';
 function TracksList(props) {
 
   const [selectedtracks, setSelectedtracks] = useState([]);
+  const [selectedtitles, setSelectedtitles] = useState([]);
 
   useEffect(() => {
     props.storeSelectedTrackToRedux(selectedtracks);
+    props.storeSelectedTitleToRedux(selectedtitles);
   })
 
   let iteration = 0;
@@ -38,7 +40,9 @@ function TracksList(props) {
               uri={v.uri} 
               title={v.name} 
               setSelectedtracks={setSelectedtracks} 
-              selectedtracks={selectedtracks} 
+              selectedtracks={selectedtracks}
+              selectedtitles={selectedtitles}
+              setSelectedtitles={setSelectedtitles} 
             />
           </div>
         </div>
@@ -59,6 +63,7 @@ const mapStateToProps = state => { // call global state
     tokenFromRedux: state.storeToken,
     searchInputFromRedux: state.storeSearch,
     tracksFromRedux: state.storeTracks,
+    titlesFromRedux: state.storeTitles,
     searchResultFromRedux: state.storeSearchResult,
   }
 }
@@ -67,6 +72,7 @@ const mapDispatchToProps = dispatch => { // change global state
   return{
     storeTokenToRedux: (v) => dispatch(actions.tokenAction(v)),
     storeSelectedTrackToRedux: (v) => dispatch(actions.selectTrackAction(v)),
+    storeSelectedTitleToRedux: (v) => dispatch(actions.selectTitleAction(v)),
     storeSearchInputToRedux: (v) => dispatch(actions.searchInput(v)),
     storeSearchResultToRedux: (v) => dispatch(actions.searchResult(v)),
   }
