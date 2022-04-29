@@ -9,9 +9,6 @@ import actions from '../../store/redux/actions/index.js';
 
 const PlaylistCard = (props) => {
 
-  // const albumItems = selectedsongTitle.map((v) => {
-  //   return(<div key={v}>{v}</div>)
-  // })
   const [playlistid, setPlaylistid] = useState('');
   const [playlist, setPlaylist] = useState({
     title: '',
@@ -49,7 +46,9 @@ const PlaylistCard = (props) => {
 
   const inputToPlaylist = async () => {
     if(playlistid === ''){return 0};
-    let tracks = props.tracksFromRedux
+    let selectedUris = [];
+    selectedUris = props.titlesFromRedux?.map(v => selectedUris.concat(v.uri));
+    let tracks = selectedUris
       .toString()
       .replace(/:/g,"%3A")
       .replace(/,/g,"%2C"); //convert array songs, so that can be processed directly in URL
@@ -80,8 +79,16 @@ const PlaylistCard = (props) => {
     </div>
   );
 
-  const selectedTitles = props.titlesFromRedux?.map((v) => {
-      return(<div key={v}>{v}</div>)
+  // calling multiple array in one map function
+  // by default the first parameter belongs to array attached to map method, and the second one belongs to iterator
+  // see map documentation https://www.w3schools.com/jsref/jsref_map.asp
+  const selectedTitles = props.titlesFromRedux?.map((v) => { 
+      return(
+        <div key={v.uri}>
+          {v.title}
+          
+        </div>
+      )
     })
 
   return (
@@ -119,7 +126,7 @@ const PlaylistCard = (props) => {
             </CardActions>
           </Card>
         </Box>
-        {/* {selectedTitles} */}
+        {selectedTitles}
       </form>
     </>
 

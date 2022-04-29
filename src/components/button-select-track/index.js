@@ -4,8 +4,9 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import actions from '../../store/redux/actions/index.js';
+import PlaylistCard from '../card-playlist/index.js';
 
-const ButtonSelectTrack = ({uri, title, selectedtracks, setSelectedtracks, selectedtitles, setSelectedtitles}) => {
+const ButtonSelectTrack = ({data, selectedtracks, setSelectedtracks, selectedtitles, setSelectedtitles}) => {
   const btnOn = {backgroundColor: "rgb(100, 120, 237)", color: "rgb(255, 255, 255)"};
   const btnOff = {backgroundColor: "rgb(229, 233, 240)"};
 
@@ -17,28 +18,31 @@ const ButtonSelectTrack = ({uri, title, selectedtracks, setSelectedtracks, selec
     if(btnstatus){
       setBtnmessage('selected');
       setBtncolor(btnOn);
-      setSelectedtracks(selectedtracks.concat(uri));
-      setSelectedtitles(selectedtitles.concat(title));
+      setSelectedtracks(selectedtracks.concat(data.uri));
+      setSelectedtitles(selectedtitles.concat({"uri": data.uri, "title": data.name}));
     }else{
       setBtnmessage('select');
       setBtncolor(btnOff);
-      deleteHandler(uri, title)
+      deleteHandler(data.uri)
     }
   }, [btnstatus])
 
   const clickHandler = () => {
     setBtnstatus(!btnstatus);
-    console.log(uri+' '+title);
+    console.log(data.uri+' '+data.name);
   }
 
-  const deleteHandler = (deletedUri, deletedTitle) => {
-    setSelectedtracks(selectedtracks.filter(v => v !== deletedUri))
-    setSelectedtitles(selectedtitles.filter(v => v !== deletedTitle))
+  const deleteHandler = (deletedItem) => {
+    setSelectedtitles(selectedtitles.filter(v => v.uri !== deletedItem))
   }
+
+  const ButtonList = (
+    <button style={btncolor} onClick={() => {clickHandler()}}>{btnmessage}</button>
+  )
 
   return(
     <div className='Item-button addPlaylist'>
-          <button style={btncolor} onClick={() => {clickHandler()}}>{btnmessage}</button>
+      <button style={btncolor} onClick={() => {clickHandler()}}>{btnmessage}</button>
     </div>
   );
 }

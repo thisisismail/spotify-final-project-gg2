@@ -37,8 +37,7 @@ function TracksList(props) {
           <div id="duration">{msecToSec(v.duration_ms)}</div>
           <div id="select-btn">
             <ButtonSelectTrack 
-              uri={v.uri} 
-              title={v.name} 
+              data={v}
               setSelectedtracks={setSelectedtracks} 
               selectedtracks={selectedtracks}
               selectedtitles={selectedtitles}
