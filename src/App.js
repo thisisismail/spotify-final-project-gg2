@@ -1,12 +1,17 @@
-import './App.css'
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import { BrowserRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { ThemeProvider } from '@mui/material';
-import LoginPage from '../src/sections/body/login-page/index.js';
-import BodyPage from '../src/sections/body/playlist-page';
-import themeKoe from '../src/material-ui/theme/index.js';
-import NavBar from '../src/sections/header/index.js';
+import "./App.css";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { ThemeProvider } from "@mui/material";
+import LoginPage from "../src/sections/body/login-page/index.js";
+import BodyPage from "../src/sections/body/playlist-page";
+import themeKoe from "../src/material-ui/theme/index.js";
+import NavBar from "../src/sections/header/index.js";
 
 function App(props) {
   return (
@@ -17,14 +22,14 @@ function App(props) {
           <Router>
             <Switch>
               <Route path="/" exact>
-                <LoginPage/>
+                <LoginPage />
               </Route>
               <Route path="/private">
-                {
-                  (props.tokenFromRedux !== '') 
-                  ? ( <BodyPage/> ) 
-                  : ( <Redirect to="/"/> )
-                }
+                {props.tokenFromRedux !== "" ? (
+                  <BodyPage />
+                ) : (
+                  <Redirect to="/" />
+                )}
               </Route>
             </Switch>
           </Router>
@@ -34,10 +39,10 @@ function App(props) {
   );
 }
 
-const mapStateToProps = state => {
-  return{
+const mapStateToProps = (state) => {
+  return {
     tokenFromRedux: state.storeToken,
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps)(App);
